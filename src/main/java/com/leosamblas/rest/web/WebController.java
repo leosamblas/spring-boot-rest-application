@@ -98,7 +98,7 @@ public class WebController {
 		Order order = new Order(Direction.fromString(sortParam[0]), sortParam[1]);
 		Pageable pageable = PageRequest.of(page, size, Sort.by(order));
 		
-		Page<AlbumEntity> albumEntities = albumRepository.findAll(pageable);
+		Page<AlbumEntity> albumEntities = albumRepository.findByTitleContaining(title, pageable);
 		
 		if(albumEntities.getContent().isEmpty()) {
 			return new ResponseEntity<>(HttpStatus.NO_CONTENT);
